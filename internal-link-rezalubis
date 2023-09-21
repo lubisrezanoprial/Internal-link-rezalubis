@@ -1,0 +1,30 @@
+var internalLinks = {
+  "guru": "/2023/07/pengertian-guru.html",
+  "siswa": "/2023/08/peserta-didik.html",
+  "belajar": "/2023/06/pengertian-belajar.html",
+  "peserta didik": "/2023/08/peserta-didik.html",
+  "fungsi kurikulum": "/2023/06/fungsi-kurikulum.html",
+  "evaluasi pembelajaran": "/2019/10/pengertian-evaluasi-pembelajaran.html",
+  "fungsi evaluasi": "/url-3.html",
+  "metode pembelajaran": "/url-3.html",
+  // dan seterusnya
+};
+
+document.addEventListener("DOMContentLoaded", function() {
+  var articleContent = document.getElementById("post_body");
+  if (articleContent) {
+    var linkedKeywords = {}; // Objek untuk melacak kata kunci yang telah diberi tautan
+
+    for (var keyword in internalLinks) {
+      if (internalLinks.hasOwnProperty(keyword)) {
+        var regex = new RegExp("\\b" + keyword + "\\b", "g");
+
+        // Cek apakah kata kunci sudah memiliki tautan
+        if (!linkedKeywords[keyword]) {
+          articleContent.innerHTML = articleContent.innerHTML.replace(regex, '<a href="' + internalLinks[keyword] + '">' + keyword + '</a>');
+          linkedKeywords[keyword] = true; // Tandai kata kunci sebagai sudah diberi tautan
+        }
+      }
+    }
+  }
+});
